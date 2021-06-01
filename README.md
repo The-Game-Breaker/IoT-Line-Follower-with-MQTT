@@ -233,14 +233,14 @@ Tot slot kunnen de wagentjes in werking worden gesteld. Door deze op de lijn te 
 
 [https://flows.nodered.org/node/node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard)
 
-#Colors:
+## Colors:
 
-##004146 RGB (0,65,70)
-
-##018076 RGB (1,128,118)
-
-##03BFB5 RGB (3,191,181)
-
-##949398 RGB (148,147,152)
-
-##EFF5F9 RGB (239,245,249)
+ #004146 RGB (0,65,70)
+ 
+ #018076 RGB (1,128,118)
+ 
+ #03BFB5 RGB (3,191,181)
+ 
+ #949398 RGB (148,147,152)
+ 
+ #EFF5F9 RGB (239,245,249)
