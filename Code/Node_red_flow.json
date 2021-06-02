@@ -1,0 +1,1425 @@
+[
+    {
+        "id": "c1f53cff.8496f8",
+        "type": "tab",
+        "label": "Mercedes_Linefollower",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8828b705.110ca",
+        "type": "mqtt in",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "topic": "home/car/carstatus",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "9f268c1c.a435b8",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "338ec6a7.04f322",
+                "e99783af.3b8e6",
+                "5536f5ef.05cb14"
+            ]
+        ]
+    },
+    {
+        "id": "338ec6a7.04f322",
+        "type": "debug",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "efefc5b7.909168",
+        "type": "mqtt out",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "topic": "home/car/control",
+        "qos": "0",
+        "retain": "",
+        "broker": "9f268c1c.a435b8",
+        "x": 510,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "fab67abf.588e4",
+        "type": "inject",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Driveoverwrite",
+        "payloadType": "str",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "336c503d.c487b"
+            ]
+        ]
+    },
+    {
+        "id": "e99783af.3b8e6",
+        "type": "ui_text",
+        "z": "c1f53cff.8496f8",
+        "group": "21bab9eb.1d47f6",
+        "order": 1,
+        "width": 8,
+        "height": 2,
+        "name": "",
+        "label": "Car-status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 450,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "336c503d.c487b",
+        "type": "ui_button",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "21bab9eb.1d47f6",
+        "order": 2,
+        "width": 8,
+        "height": 2,
+        "passthru": true,
+        "label": "Skipwait",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Driveoverwrite",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "efefc5b7.909168"
+            ]
+        ]
+    },
+    {
+        "id": "8062ba57.7f13a",
+        "type": "ui_chart",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "21bab9eb.1d47f6",
+        "order": 3,
+        "width": 16,
+        "height": 4,
+        "label": "Exhibit progression",
+        "chartType": "horizontalBar",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Car0@HOME",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "10",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#03bfb5",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 1090,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c939dfa.84f",
+        "type": "counter",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "init": "0",
+        "step": "1",
+        "lower": "0",
+        "upper": "11",
+        "mode": "increment",
+        "outputs": 2,
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "488e22aa.305ccc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2dfc9598.9de3aa",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "msg object",
+        "func": "msg.increment = 1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "9c939dfa.84f"
+            ]
+        ]
+    },
+    {
+        "id": "90ce4c0c.62f9",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "msg object",
+        "func": "msg.decrement = 11 ;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "9c939dfa.84f"
+            ]
+        ]
+    },
+    {
+        "id": "5536f5ef.05cb14",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Crossline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "2dfc9598.9de3aa"
+            ]
+        ]
+    },
+    {
+        "id": "d45c878b.5f3ae",
+        "type": "inject",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Crossline",
+        "payloadType": "str",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "5536f5ef.05cb14"
+            ]
+        ]
+    },
+    {
+        "id": "488e22aa.305ccc",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "10",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "10",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 160,
+        "wires": [
+            [
+                "8062ba57.7f13a",
+                "8540c5ea.367b4",
+                "3641c55e.f54a42",
+                "199995ad.7f8bba"
+            ],
+            [
+                "90ce4c0c.62f9"
+            ]
+        ]
+    },
+    {
+        "id": "8540c5ea.367b4",
+        "type": "debug",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3641c55e.f54a42",
+        "type": "ui_toast",
+        "z": "c1f53cff.8496f8",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "#00D2BE",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 1210,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "568b5dec.d4b2b4",
+        "type": "ui_audio",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "21bab9eb.1d47f6",
+        "voice": "urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US",
+        "always": true,
+        "x": 2100,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "199995ad.7f8bba",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "func": "msg.payload = String(msg.payload); return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1180,
+        "y": 180,
+        "wires": [
+            [
+                "fa150d2.06b957"
+            ]
+        ]
+    },
+    {
+        "id": "6bd03a4.80b9b44",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Home",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Home",
+        "output": "str",
+        "x": 1590,
+        "y": 60,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "fa150d2.06b957",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "7",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "8",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "9",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 11,
+        "x": 1330,
+        "y": 260,
+        "wires": [
+            [
+                "6bd03a4.80b9b44"
+            ],
+            [
+                "38394c87.9147b4"
+            ],
+            [
+                "43e54f0b.0f2308"
+            ],
+            [
+                "9614c28b.201858"
+            ],
+            [
+                "d53ff50a.97775"
+            ],
+            [
+                "855f8a3c.75262"
+            ],
+            [
+                "338ab61a.dd0f52"
+            ],
+            [
+                "1970986c.3e904"
+            ],
+            [
+                "7411278b.3616a"
+            ],
+            [
+                "22a6c1d5.7d093e"
+            ],
+            [
+                "f97c9920.2f53d"
+            ]
+        ]
+    },
+    {
+        "id": "38394c87.9147b4",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Pioneers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Pioneers 1886 to 1900",
+        "output": "str",
+        "x": 1600,
+        "y": 100,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "43e54f0b.0f2308",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Mercedes",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Mercedes 1900 to 1914",
+        "output": "str",
+        "x": 1600,
+        "y": 140,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "9614c28b.201858",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Voyagers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Voyagers",
+        "output": "str",
+        "x": 1640,
+        "y": 180,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "d53ff50a.97775",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Times of Change",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Times of Change 1914 to 1945",
+        "output": "str",
+        "x": 1630,
+        "y": 220,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "855f8a3c.75262",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Carriers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Carriers",
+        "output": "str",
+        "x": 1630,
+        "y": 260,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "338ab61a.dd0f52",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Post-war Miracle",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Post-war Miracle 1945 to 1960",
+        "output": "str",
+        "x": 1630,
+        "y": 300,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "1970986c.3e904",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Helpers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Helpers",
+        "output": "str",
+        "x": 1630,
+        "y": 340,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "7411278b.3616a",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Visionaries",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Visionaries 1960 to 1982",
+        "output": "str",
+        "x": 1610,
+        "y": 380,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "22a6c1d5.7d093e",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Celebrities",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Celebrities",
+        "output": "str",
+        "x": 1640,
+        "y": 420,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "f97c9920.2f53d",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "New Start",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} New Start seit 1982",
+        "output": "str",
+        "x": 1600,
+        "y": 460,
+        "wires": [
+            [
+                "568b5dec.d4b2b4"
+            ]
+        ]
+    },
+    {
+        "id": "2ec5335d.3ff304",
+        "type": "mqtt in",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "topic": "home/car/carstatus",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "9f268c1c.a435b8",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "1ecd9f7f.0df101",
+                "d8556ebe.bfdd5",
+                "1ff0a78f.29dfa8"
+            ]
+        ]
+    },
+    {
+        "id": "1ecd9f7f.0df101",
+        "type": "debug",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "9cd13f77.7564c8",
+        "type": "mqtt out",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "topic": "home/car/control",
+        "qos": "0",
+        "retain": "",
+        "broker": "9f268c1c.a435b8",
+        "x": 510,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "bc16e754.e2ad7",
+        "type": "inject",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Driveoverwrite",
+        "payloadType": "str",
+        "x": 130,
+        "y": 960,
+        "wires": [
+            [
+                "c58b8d00.3c8e58"
+            ]
+        ]
+    },
+    {
+        "id": "d8556ebe.bfdd5",
+        "type": "ui_text",
+        "z": "c1f53cff.8496f8",
+        "group": "245b3660.2d8d8a",
+        "order": 1,
+        "width": 8,
+        "height": 2,
+        "name": "",
+        "label": "Car-status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 450,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c58b8d00.3c8e58",
+        "type": "ui_button",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "245b3660.2d8d8a",
+        "order": 2,
+        "width": 8,
+        "height": 2,
+        "passthru": true,
+        "label": "Skipwait",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 300,
+        "y": 960,
+        "wires": [
+            [
+                "9cd13f77.7564c8"
+            ]
+        ]
+    },
+    {
+        "id": "f4c58fb.052587",
+        "type": "ui_chart",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "245b3660.2d8d8a",
+        "order": 3,
+        "width": 16,
+        "height": 4,
+        "label": "Exhibit progression",
+        "chartType": "horizontalBar",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Car0@HOME",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "10",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#03bfb5",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 1090,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca022cc2.454a6",
+        "type": "counter",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "init": "0",
+        "step": "1",
+        "lower": "0",
+        "upper": "11",
+        "mode": "increment",
+        "outputs": 2,
+        "x": 740,
+        "y": 760,
+        "wires": [
+            [
+                "10dd549d.d43e3b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6f3c12d2.580df4",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "msg object",
+        "func": "msg.increment = 1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 570,
+        "y": 760,
+        "wires": [
+            [
+                "ca022cc2.454a6"
+            ]
+        ]
+    },
+    {
+        "id": "60dd55f.939aa2c",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "msg object",
+        "func": "msg.decrement = 11 ;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 570,
+        "y": 820,
+        "wires": [
+            [
+                "ca022cc2.454a6"
+            ]
+        ]
+    },
+    {
+        "id": "1ff0a78f.29dfa8",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Crossline",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 760,
+        "wires": [
+            [
+                "6f3c12d2.580df4"
+            ]
+        ]
+    },
+    {
+        "id": "eb08cfbc.398728",
+        "type": "inject",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Crossline",
+        "payloadType": "str",
+        "x": 140,
+        "y": 760,
+        "wires": [
+            [
+                "1ff0a78f.29dfa8"
+            ]
+        ]
+    },
+    {
+        "id": "10dd549d.d43e3b",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "10",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "10",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 740,
+        "wires": [
+            [
+                "f4c58fb.052587",
+                "473f0704.93f5a",
+                "68bc7ac1.505c64",
+                "97cfda96.70e6c"
+            ],
+            [
+                "60dd55f.939aa2c"
+            ]
+        ]
+    },
+    {
+        "id": "473f0704.93f5a",
+        "type": "debug",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "68bc7ac1.505c64",
+        "type": "ui_toast",
+        "z": "c1f53cff.8496f8",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "#00D2BE",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 1210,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "a07109cf.083e8",
+        "type": "ui_audio",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "group": "245b3660.2d8d8a",
+        "voice": "urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US",
+        "always": true,
+        "x": 2100,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "97cfda96.70e6c",
+        "type": "function",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "func": "msg.payload = String(msg.payload); return msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1180,
+        "y": 760,
+        "wires": [
+            [
+                "fbf2d089.62071"
+            ]
+        ]
+    },
+    {
+        "id": "dee1e221.1623f",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Home",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Home",
+        "output": "str",
+        "x": 1590,
+        "y": 640,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "fbf2d089.62071",
+        "type": "switch",
+        "z": "c1f53cff.8496f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "7",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "8",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "9",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 11,
+        "x": 1330,
+        "y": 840,
+        "wires": [
+            [
+                "dee1e221.1623f"
+            ],
+            [
+                "f1a65fea.ba9da8"
+            ],
+            [
+                "8e866b4f.4fb7b"
+            ],
+            [
+                "a706927c.47c79"
+            ],
+            [
+                "a31c3d55.c98088"
+            ],
+            [
+                "40ca6d0b.0314ac"
+            ],
+            [
+                "77af5c6a.c6c9b4"
+            ],
+            [
+                "c52b0604.cce3a"
+            ],
+            [
+                "91a130eb.b52088"
+            ],
+            [
+                "cd24ac6c.41448"
+            ],
+            [
+                "b15e84b3.a6b658"
+            ]
+        ]
+    },
+    {
+        "id": "f1a65fea.ba9da8",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Pioneers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Pioneers 1886 to 1900",
+        "output": "str",
+        "x": 1600,
+        "y": 680,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "8e866b4f.4fb7b",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Mercedes",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Mercedes 1900 to 1914",
+        "output": "str",
+        "x": 1600,
+        "y": 720,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "a706927c.47c79",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Voyagers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Voyagers",
+        "output": "str",
+        "x": 1640,
+        "y": 760,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "a31c3d55.c98088",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Times of Change",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Times of Change 1914 to 1945",
+        "output": "str",
+        "x": 1630,
+        "y": 800,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "40ca6d0b.0314ac",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Carriers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Carriers",
+        "output": "str",
+        "x": 1630,
+        "y": 840,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "77af5c6a.c6c9b4",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Post-war Miracle",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Post-war Miracle 1945 to 1960",
+        "output": "str",
+        "x": 1630,
+        "y": 880,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "c52b0604.cce3a",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Helpers",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Helpers",
+        "output": "str",
+        "x": 1630,
+        "y": 920,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "91a130eb.b52088",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Visionaries",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Visionaries 1960 to 1982",
+        "output": "str",
+        "x": 1610,
+        "y": 960,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "cd24ac6c.41448",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "Gallery of Celebrities",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} Gallery of Celebrities",
+        "output": "str",
+        "x": 1640,
+        "y": 1000,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "b15e84b3.a6b658",
+        "type": "template",
+        "z": "c1f53cff.8496f8",
+        "name": "New Start",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload}} New Start seit 1982",
+        "output": "str",
+        "x": 1600,
+        "y": 1040,
+        "wires": [
+            [
+                "a07109cf.083e8"
+            ]
+        ]
+    },
+    {
+        "id": "9f268c1c.a435b8",
+        "type": "mqtt-broker",
+        "name": "localmqtt",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "pi_client",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "21bab9eb.1d47f6",
+        "type": "ui_group",
+        "name": "Car0",
+        "tab": "3a69a3a3.2ab5fc",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": true
+    },
+    {
+        "id": "245b3660.2d8d8a",
+        "type": "ui_group",
+        "name": "Car1",
+        "tab": "3a69a3a3.2ab5fc",
+        "order": 2,
+        "disp": true,
+        "width": "16",
+        "collapse": true
+    },
+    {
+        "id": "3a69a3a3.2ab5fc",
+        "type": "ui_tab",
+        "name": "Mercedes BottasControl",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
